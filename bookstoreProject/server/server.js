@@ -35,9 +35,7 @@ app.get('/books/:id', async (req, res) => {
     if (!getBookByID) {
         return res.status(400).json({ message: `Book with id ${id} does not exist.` })
     }
-        res.status(200).json({
-            data: getBookByID,
-        })
+        res.status(200).json({getBookByID})
 })
 
 // Create(Save) A New Book
