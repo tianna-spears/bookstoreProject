@@ -5,9 +5,15 @@ const app= express();
 const PORT= process.env.PORT || 5000;
 const connectDB= require('./database/connectDB')
 const booksRoute= require('./routes/booksRoute')
+const cors = require('cors')
 
 // middleware
 app.use(express.json())
+app.use(cors({
+    origin: 'http://localhost:5000',
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+    allowedHeaders: ['Content-Type']
+}))
 
 // setup router
 app.get('/', (req, res) => {
