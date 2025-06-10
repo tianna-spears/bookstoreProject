@@ -50,6 +50,40 @@ app.post('/books', async (req, res) => {
     }
 })
 
+// Update a book 
+app.patch('/books/:id', async (req, res) => {
+    const { title, author, publishYear } = req.body;
+        const { id } = req.params;
+
+    if (!title || !author || !publishYear) {
+        res.status(400).json({ message: 'Please fill out all required fields: title, author, and publishYear.' })
+    } 
+
+    try {
+    const updateBook = await BooksSchema.findByIdAndUpdate(id, req.body)
+
+    if(!updateBook) {
+        res.send(404).json({  message: 'Book not found!'})
+    }
+    res.status(200).send({  message: 'Book updated successfully!'})
+} catch {
+    res.status(500).json({ message: 'Server error'})
+        } 
+    }
+)
+
+// Delete book
+app.delete('/book/:id', async (req, res) => {
+    const { id } = req.params;
+    const deleteBook = await BooksSchema.findByIdAndDelete( id )
+
+    if (!deleteBook) {
+        res.status(404).send({ message: `Book with id ${id} not found.`})
+    }
+    res.status(200).send('Book deleted successfully.')
+})
+
+
 app.listen(PORT, () => {
     console.log(`Server is listening on Port ${PORT}`);
     connectDB()
