@@ -9,11 +9,12 @@ const cors = require('cors')
 
 // middleware
 app.use(express.json())
-app.use(cors({
-    origin: 'http://localhost:5000',
-    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
-    allowedHeaders: ['Content-Type']
-}))
+app.use(cors())
+// app.use(cors({
+//     origin: 'http://localhost:5000',
+//     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+//     allowedHeaders: ['Content-Type']
+// }))
 
 // setup router
 app.get('/', (req, res) => {
