@@ -10,18 +10,20 @@ const ShowBook = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    console.log("Book ID from URL:", id); // Add this line
+  if (!id) return;
     setLoading(true);
-    axios
-      .get(`http://localhost:5000/books/${id}`)
-      .then((response) => {
-        setBook(response.data);
-        setLoading(false);
-      })
+    axios.get(`http://localhost:5000/books/${id}`)
+     .then((response) => {
+  console.log('Response data:', response.data);
+  setBook(response.data.getbyId || response.data.data || response.data);
+  setLoading(false);
+})
       .catch((error) => {
         console.log(error);
         setLoading(false);
       });
-  }, [id], );
+  }, [id] );
 
   return (
     <div className='p-4'>
