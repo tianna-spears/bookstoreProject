@@ -10,7 +10,6 @@ const getAllBooks = async (req, res) => {
         console.log(error)
         return res.status(404).json({ message: 'No books found.' })
     } 
-        console.log('Book successfully created!')
         res.status(200).json({
             data: getBooks,
             count: getBooks.length     
@@ -25,7 +24,7 @@ const getBookById= async (req, res) => {
     if (!getbyId) {
         return res.status(400).json({ message: `Book with id ${id} does not exist.` })
     }
-        res.status(200).json({getbyId})
+        res.status(200).json(getbyId)
 }
 
 // Create(Save) A New Book
