@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import React from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import BackButton from '../components/BackButton'
+import Spinner from "../components/Spinner";
 
 
 const ShowBook = () => {
@@ -10,12 +12,10 @@ const ShowBook = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    console.log("Book ID from URL:", id); // Add this line
   if (!id) return;
     setLoading(true);
     axios.get(`http://localhost:5000/books/${id}`)
      .then((response) => {
-  console.log('Response data:', response.data);
   setBook(response.data.getbyId || response.data.data || response.data);
   setLoading(false);
 })
